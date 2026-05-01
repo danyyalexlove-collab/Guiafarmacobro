@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmaCobro — Guía de Uso</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --vd:#0f2d1a;--v:#1a4d2e;--vm:#2d6a4f;--vc:#52b788;--vb:#74c69d;
+  --ro:#e63946;--am:#f4a261;--cr:#f8f4e8;--bl:#ffffff;--gr:#6b7c70;--gc:#e4ede6;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Sora',sans-serif;background:var(--cr);color:var(--vd);overflow-x:hidden;}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,var(--vd) 0%,var(--v) 60%,var(--vm) 100%);padding:60px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2374c69d' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
+.hero-badge{display:inline-block;background:rgba(116,198,157,.15);border:1px solid rgba(116,198,157,.3);color:var(--vb);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,8vw,4rem);color:var(--cr);line-height:1.05;margin-bottom:12px;}
+.hero-title span{color:var(--vb);font-style:italic;}
+.hero-sub{font-size:.95rem;color:rgba(248,244,232,.6);max-width:400px;margin:0 auto 32px;line-height:1.6;}
+.hero-roles{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.hero-role{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;color:var(--cr);font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:8px;}
+
+/* INSTALACIÓN */
+.install-section{background:var(--vd);padding:60px 24px;text-align:center;}
+.install-title{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--cr);margin-bottom:8px;}
+.install-sub{font-size:.85rem;color:rgba(248,244,232,.5);margin-bottom:36px;}
+.install-steps{display:flex;flex-direction:column;gap:0;max-width:420px;margin:0 auto;}
+.install-step{display:flex;align-items:flex-start;gap:16px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+.install-step:last-child{border-bottom:none;}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--vb);color:var(--vd);font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-info{}
+.step-title{font-weight:700;color:var(--cr);font-size:.92rem;margin-bottom:4px;}
+.step-desc{font-size:.78rem;color:rgba(248,244,232,.5);line-height:1.5;}
+.step-code{background:rgba(116,198,157,.1);border:1px solid rgba(116,198,157,.2);border-radius:8px;padding:8px 12px;font-size:.75rem;color:var(--vb);margin-top:8px;word-break:break-all;text-align:left;}
+
+/* SECCIONES */
+.section{padding:60px 24px;max-width:900px;margin:0 auto;}
+.section-badge{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--vm);margin-bottom:10px;}
+.section-badge::before{content:'';width:20px;height:2px;background:var(--vc);}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.1;margin-bottom:12px;}
+.section-title em{font-style:italic;color:var(--vc);}
+.section-desc{font-size:.88rem;color:var(--gr);line-height:1.7;max-width:560px;margin-bottom:36px;}
+
+/* PHONE MOCKUP */
+.phone{width:220px;background:var(--vd);border-radius:32px;padding:12px;box-shadow:0 24px 60px rgba(15,45,26,.35),0 0 0 2px rgba(116,198,157,.15);flex-shrink:0;margin:0 auto;}
+.phone-notch{width:80px;height:6px;background:rgba(255,255,255,.1);border-radius:3px;margin:0 auto 10px;}
+.phone-screen{background:var(--cr);border-radius:22px;overflow:hidden;aspect-ratio:9/16;}
+
+/* MOCK SCREENS */
+.screen{width:100%;height:100%;display:flex;flex-direction:column;}
+.mock-topbar{background:var(--vd);padding:10px 12px 8px;display:flex;align-items:center;justify-content:space-between;}
+.mock-logo{font-family:'DM Serif Display',serif;font-size:.9rem;color:var(--cr);}
+.mock-logo span{color:var(--vb);font-style:italic;}
+.mock-av{width:20px;height:20px;border-radius:50%;background:var(--vm);display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:700;color:var(--cr);}
+.mock-content{flex:1;padding:10px 10px 0;overflow:hidden;}
+.mock-title{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--vd);margin-bottom:3px;}
+.mock-sub{font-size:.55rem;color:var(--gr);margin-bottom:10px;}
+.mock-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;}
+.mock-stat{background:var(--bl);border-radius:8px;padding:8px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.mock-snum{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--v);}
+.mock-slabel{font-size:.45rem;color:var(--gr);text-transform:uppercase;}
+.mock-item{background:var(--bl);border-radius:8px;padding:8px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(0,0,0,.06);}
+.mock-icon{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--v),var(--vm));display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;}
+.mock-iname{font-weight:700;font-size:.62rem;color:var(--vd);}
+.mock-imeta{font-size:.48rem;color:var(--gr);}
+.mock-ideuda{font-weight:800;font-size:.65rem;color:var(--ro);}
+.mock-bnav{background:var(--bl);border-top:1px solid var(--gc);display:flex;padding:6px 0 4px;}
+.mock-ni{flex:1;text-align:center;font-size:.45rem;color:var(--gr);}
+.mock-ni.active{color:var(--v);}
+.mock-ni-i{font-size:.8rem;display:block;}
+
+/* LOGIN SCREEN */
+.mock-login{background:linear-gradient(160deg,var(--vd),var(--v));width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;}
+.mock-login-logo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--cr);margin-bottom:4px;}
+.mock-login-logo span{color:var(--vb);font-style:italic;}
+.mock-login-sub{font-size:.45rem;color:rgba(248,244,232,.4);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;}
+.mock-lcard{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;width:100%;}
+.mock-rbtn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:8px 10px;display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.mock-rbtn.sel{background:rgba(116,198,157,.2);border-color:var(--vb);}
+.mock-ricon{font-size:.9rem;}
+.mock-rname{font-size:.55rem;font-weight:700;color:var(--cr);}
+.mock-rdesc{font-size:.42rem;color:rgba(248,244,232,.4);}
+.mock-input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 8px;font-size:.5rem;color:rgba(248,244,232,.6);margin-bottom:6px;}
+.mock-lbtn{width:100%;background:var(--vb);color:var(--vd);border:none;border-radius:7px;padding:8px;font-size:.58rem;font-weight:700;}
+
+/* REGISTRO SCREEN */
+.mock-tabs{display:flex;background:var(--gc);border-radius:7px;padding:2px;margin-bottom:8px;}
+.mock-tab{flex:1;text-align:center;padding:5px;border-radius:5px;font-size:.45rem;font-weight:600;color:var(--gr);}
+.mock-tab.active{background:var(--bl);color:var(--v);}
+.mock-card{background:var(--bl);border-radius:8px;padding:10px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.mock-field{margin-bottom:8px;}
+.mock-flabel{font-size:.45rem;font-weight:700;color:var(--vd);text-transform:uppercase;margin-bottom:3px;}
+.mock-finput{width:100%;background:var(--gc);border-radius:5px;padding:6px 8px;font-size:.5rem;color:var(--gr);}
+.mock-btn{width:100%;background:var(--v);color:var(--bl);border:none;border-radius:7px;padding:8px;font-size:.55rem;font-weight:700;text-align:center;}
+.mock-btn-pago{background:linear-gradient(135deg,#f4a261,#e76f51);}
+.mock-lock{font-size:.45rem;color:var(--gr);text-align:center;margin-top:5px;}
+
+/* COBRO SCREEN */
+.mock-cobro{background:linear-gradient(135deg,#fff8f0,#fff0e0);border:1.5px solid #f4a261;border-radius:8px;padding:10px;}
+.mock-cobro-title{font-weight:700;font-size:.58rem;color:#b05010;margin-bottom:6px;}
+.mock-alerta{background:#fff3e0;border:1px solid #ffb74d;border-radius:5px;padding:6px 8px;font-size:.48rem;color:#d07000;margin-bottom:8px;}
+
+/* TRAB SCREEN */
+.mock-trab-header{background:var(--bl);border-radius:8px;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.mock-tav{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vc),var(--vb));display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:var(--vd);}
+.mock-tname{font-weight:700;font-size:.62rem;}
+.mock-tmeta{font-size:.48rem;color:var(--gr);}
+.mock-tdeuda{font-weight:800;font-size:.9rem;color:var(--ro);}
+
+/* HIST */
+.mock-hist-item{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--gc);}
+.mock-hist-f{font-size:.45rem;color:var(--gr);min-width:28px;}
+.mock-hist-n{font-size:.52rem;font-weight:600;flex:1;}
+.mock-hist-m{font-size:.55rem;font-weight:700;}
+.mock-hist-m.p{color:var(--v);}
+.mock-hist-m.d{color:var(--ro);}
+
+/* CARD INSTRUCCIONES */
+.steps-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+@media(min-width:600px){.steps-grid{grid-template-columns:1fr 1fr;}}
+.step-card{background:var(--bl);border-radius:18px;padding:24px;box-shadow:0 4px 20px rgba(15,45,26,.08);border:1.5px solid var(--gc);display:flex;flex-direction:column;gap:12px;}
+.step-card-num{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--v),var(--vm));color:var(--bl);font-weight:800;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+.step-card-title{font-weight:700;font-size:1rem;color:var(--vd);}
+.step-card-desc{font-size:.82rem;color:var(--gr);line-height:1.6;}
+.step-card-tip{background:#f0faf4;border:1px solid #b7e4c7;border-radius:8px;padding:10px 12px;font-size:.75rem;color:var(--vm);display:flex;gap:8px;align-items:flex-start;}
+
+/* LAYOUT SPLIT */
+.split{display:flex;flex-direction:column;gap:32px;align-items:center;}
+@media(min-width:640px){.split{flex-direction:row;align-items:flex-start;gap:48px;}.split .text{flex:1;}.split .phone{flex-shrink:0;}}
+
+/* ROLES SECTION */
+.roles-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+@media(min-width:600px){.roles-grid{grid-template-columns:repeat(3,1fr);}}
+.role-card{border-radius:18px;padding:24px;position:relative;overflow:hidden;}
+.role-card.dueno{background:linear-gradient(135deg,var(--vd),var(--v));color:var(--cr);}
+.role-card.cobrador{background:linear-gradient(135deg,#1a3a4d,#1a4d3a);color:var(--cr);}
+.role-card.trabajador{background:linear-gradient(135deg,#2d1a4d,#1a2d4d);color:var(--cr);}
+.role-card-icon{font-size:2.5rem;margin-bottom:12px;}
+.role-card-name{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:8px;}
+.role-card-pin{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:3px 10px;font-size:.68rem;margin-bottom:12px;}
+.role-card-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.role-card-list li{font-size:.78rem;opacity:.8;display:flex;align-items:flex-start;gap:6px;}
+.role-card-list li::before{content:'→';opacity:.5;flex-shrink:0;}
+
+/* ALERTA LOCK */
+.lock-box{background:#fff3e0;border:2px solid #f4a261;border-radius:14px;padding:20px 24px;display:flex;gap:16px;align-items:flex-start;margin:32px 0;}
+.lock-icon-big{font-size:2rem;flex-shrink:0;}
+.lock-title{font-weight:700;font-size:.95rem;color:#b05010;margin-bottom:6px;}
+.lock-desc{font-size:.82rem;color:#c06010;line-height:1.6;}
+
+/* DIVIDER */
+.divider{background:var(--v);padding:12px 0;overflow:hidden;white-space:nowrap;}
+.div-inner{display:inline-flex;animation:scroll 20s linear infinite;gap:0;}
+.div-item{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(248,244,232,.7);padding:0 28px;}
+.div-dot{color:var(--vb);opacity:.5;}
+@keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* FOOTER */
+footer{background:var(--vd);padding:40px 24px;text-align:center;}
+.footer-logo{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--cr);margin-bottom:6px;}
+.footer-logo span{color:var(--vb);font-style:italic;}
+.footer-sub{font-size:.78rem;color:rgba(248,244,232,.4);margin-bottom:16px;}
+.footer-link{display:inline-block;background:var(--vb);color:var(--vd);padding:12px 28px;border-radius:10px;font-weight:700;font-size:.85rem;text-decoration:none;word-break:break-all;}
+
+/* ANIMACIONES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{opacity:0;animation:fadeUp .6s ease forwards;}
+.fade-up:nth-child(1){animation-delay:.1s;}
+.fade-up:nth-child(2){animation-delay:.2s;}
+.fade-up:nth-child(3){animation-delay:.3s;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📱 Guía Oficial de Uso</div>
+  <h1 class="hero-title">Farma<span>Cobro</span></h1>
+  <p class="hero-sub">Control de comidas para vendedores en granjas de Ontario. Aprende a usar la app en minutos.</p>
+  <div class="hero-roles">
+    <div class="hero-role">👑 Dueño</div>
+    <div class="hero-role">🧾 Cobrador</div>
+    <div class="hero-role">👷 Trabajador</div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="div-inner">
+    <span class="div-item">Registrar Comidas</span><span class="div-dot">◆</span>
+    <span class="div-item">Cobrar Deudas</span><span class="div-dot">◆</span>
+    <span class="div-item">Agregar Clientes</span><span class="div-dot">◆</span>
+    <span class="div-item">Ver Reportes</span><span class="div-dot">◆</span>
+    <span class="div-item">Múltiples Granjas</span><span class="div-dot">◆</span>
+    <span class="div-item">Registrar Comidas</span><span class="div-dot">◆</span>
+    <span class="div-item">Cobrar Deudas</span><span class="div-dot">◆</span>
+    <span class="div-item">Agregar Clientes</span><span class="div-dot">◆</span>
+    <span class="div-item">Ver Reportes</span><span class="div-dot">◆</span>
+    <span class="div-item">Múltiples Granjas</span><span class="div-dot">◆</span>
+  </div>
+</div>
+
+<!-- INSTALACIÓN -->
+<div class="install-section">
+  <div class="install-title">📲 Cómo instalar la app</div>
+  <div class="install-sub">En tu teléfono Android — funciona sin App Store</div>
+  <div class="install-steps">
+    <div class="install-step">
+      <div class="step-num">1</div>
+      <div class="step-info">
+        <div class="step-title">Abre Google Chrome</div>
+        <div class="step-desc">Asegúrate de usar Chrome, no otro navegador.</div>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">2</div>
+      <div class="step-info">
+        <div class="step-title">Entra al link de la app</div>
+        <div class="step-desc">Escribe o pega el link en la barra de Chrome:</div>
+        <div class="step-code">danyyalexlove-collab.github.io/Co/farmacobro-23.html</div>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">3</div>
+      <div class="step-info">
+        <div class="step-title">Toca los 3 puntos ⋮</div>
+        <div class="step-desc">Arriba a la derecha de Chrome.</div>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">4</div>
+      <div class="step-info">
+        <div class="step-title">Toca "Agregar a pantalla de inicio"</div>
+        <div class="step-desc">Luego toca Agregar. ¡Listo! Ya aparece como app en tu pantalla.</div>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">5</div>
+      <div class="step-info">
+        <div class="step-title">iPhone: usa Safari</div>
+        <div class="step-desc">Toca el botón compartir → "Añadir a pantalla de inicio".</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROLES -->
+<div class="section">
+  <div class="section-badge">Usuarios</div>
+  <h2 class="section-title">3 tipos de <em>acceso</em></h2>
+  <p class="section-desc">Cada persona entra con su rol. El dueño tiene acceso total, el cobrador registra y cobra, el trabajador solo ve su información.</p>
+  <div class="roles-grid">
+    <div class="role-card dueno">
+      <div class="role-card-icon">👑</div>
+      <div class="role-card-name">Dueño</div>
+      <div class="role-card-pin">Nombre + PIN secreto del dueño</div>
+      <ul class="role-card-list">
+        <li>Ver todas las granjas</li>
+        <li>Agregar y gestionar cobradores</li>
+        <li>Asignar PIN a cada cobrador</li>
+        <li>Ver rendimiento por cobrador</li>
+        <li>Ver reportes semanales</li>
+      </ul>
+    </div>
+    <div class="role-card cobrador">
+      <div class="role-card-icon">🧾</div>
+      <div class="role-card-name">Cobrador</div>
+      <div class="role-card-pin">Tu nombre + PIN personal</div>
+      <ul class="role-card-list">
+        <li>Solo ves tus granjas asignadas</li>
+        <li>Agregar clientes nuevos</li>
+        <li>Registrar comidas por persona</li>
+        <li>Registrar pagos recibidos</li>
+        <li>Cada registro queda a tu nombre</li>
+      </ul>
+    </div>
+    <div class="role-card trabajador">
+      <div class="role-card-icon">👷</div>
+      <div class="role-card-name">Trabajador</div>
+      <div class="role-card-pin">Tu nombre completo</div>
+      <ul class="role-card-list">
+        <li>Ver tus propias comidas</li>
+        <li>Ver cuánto debes</li>
+        <li>Ver tu historial semanal</li>
+        <li>No puede modificar nada</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 1: ENTRAR -->
+<div style="background:var(--gc);padding:60px 24px;">
+<div class="section" style="padding:0;">
+  <div class="split">
+    <div class="text">
+      <div class="section-badge">Paso 1</div>
+      <h2 class="section-title">Selecciona tu <em>rol</em> y entra</h2>
+      <p class="section-desc">Al abrir la app verás 3 opciones. Toca la que te corresponde, escribe tu nombre y toca Entrar.</p>
+      <div class="steps-grid">
+        <div class="step-card fade-up">
+          <div class="step-card-num">1</div>
+          <div class="step-card-title">Toca tu rol</div>
+          <div class="step-card-desc">Dueño, Cobrador o Trabajador. El que selecciones se pondrá en verde.</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">2</div>
+          <div class="step-card-title">Escribe tu nombre</div>
+          <div class="step-card-desc">Escribe tu nombre completo exactamente como te registró el dueño.</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">3</div>
+          <div class="step-card-title">PIN para dueño y cobrador</div>
+          <div class="step-card-desc">Dueño y cobrador necesitan PIN de 4 dígitos. El dueño tiene el suyo y cada cobrador tiene el suyo asignado por el dueño.</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">4</div>
+          <div class="step-card-title">La app te recuerda</div>
+          <div class="step-card-desc">La próxima vez que abras la app, ya estarás dentro automáticamente. No tienes que volver a entrar.</div>
+          <div class="step-card-tip">💡 Para cambiar de usuario toca "Salir" en la esquina superior derecha.</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="mock-login">
+          <div class="mock-login-logo">Farma<span>Cobro</span></div>
+          <div class="mock-login-sub">Control · Granjas Ontario</div>
+          <div class="mock-lcard">
+            <div style="font-size:.6rem;font-weight:600;color:var(--cr);margin-bottom:10px;text-align:center;">¿Cómo vas a entrar?</div>
+            <div class="mock-rbtn sel">
+              <div class="mock-ricon">👑</div>
+              <div><div class="mock-rname">Dueño del Negocio</div><div class="mock-rdesc">Ver todas las granjas</div></div>
+            </div>
+            <div class="mock-rbtn">
+              <div class="mock-ricon">🧾</div>
+              <div><div class="mock-rname">Cobrador</div><div class="mock-rdesc">Registrar y cobrar</div></div>
+            </div>
+            <div class="mock-rbtn">
+              <div class="mock-ricon">👷</div>
+              <div><div class="mock-rname">Trabajador</div><div class="mock-rdesc">Ver mis pedidos</div></div>
+            </div>
+            <div class="mock-input">Tu nombre completo</div>
+            <div class="mock-input">PIN (4 dígitos)</div>
+            <div class="mock-lbtn">Entrar →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PASO 2: COBRADOR GRANJAS -->
+<div class="section">
+  <div class="split">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="mock-topbar">
+            <div class="mock-logo">Farma<span>Cobro</span></div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div style="font-size:.45rem;color:var(--vb);background:rgba(116,198,157,.15);padding:2px 6px;border-radius:10px;">Cobrador</div>
+              <div class="mock-av">CM</div>
+            </div>
+          </div>
+          <div class="mock-content">
+            <div class="mock-title">Mis Granjas</div>
+            <div class="mock-sub">Toca para entrar</div>
+            <div class="mock-item">
+              <div class="mock-icon">🌾</div>
+              <div style="flex:1"><div class="mock-iname">Highline Mushrooms</div><div class="mock-imeta">Leamington · 3 clientes</div></div>
+              <div style="text-align:right"><div class="mock-ideuda">$18</div><div style="font-size:.42rem;color:var(--gr);">pendiente</div></div>
+            </div>
+            <div class="mock-item">
+              <div class="mock-icon">🌾</div>
+              <div style="flex:1"><div class="mock-iname">Mucci Farms</div><div class="mock-imeta">Leamington · 1 cliente</div></div>
+              <div style="text-align:right"><div class="mock-ideuda">$10</div><div style="font-size:.42rem;color:var(--gr);">pendiente</div></div>
+            </div>
+            <div class="mock-item" style="border:1.5px dashed var(--gc);">
+              <div style="font-size:.55rem;color:var(--gr);text-align:center;width:100;">+ Nueva Granja</div>
+            </div>
+          </div>
+          <div class="mock-bnav">
+            <div class="mock-ni active"><span class="mock-ni-i">🌿</span>Granjas</div>
+            <div class="mock-ni"><span class="mock-ni-i">📊</span>Reportes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text">
+      <div class="section-badge">Paso 2 — Cobrador</div>
+      <h2 class="section-title">Selecciona una <em>granja</em></h2>
+      <p class="section-desc">Como cobrador verás todas las granjas que tienes asignadas con el total pendiente por cobrar.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-card-num">+</div>
+          <div class="step-card-title">Agregar nueva granja</div>
+          <div class="step-card-desc">Toca el botón "+ Nueva Granja" para agregar una granja donde vas a vender.</div>
+          <div class="step-card-tip">💡 Necesitas el nombre de la granja, ubicación y tu nombre como cobrador.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-card-num">→</div>
+          <div class="step-card-title">Entrar a una granja</div>
+          <div class="step-card-desc">Toca el nombre de la granja para ver la lista de trabajadores y sus deudas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 3: AGREGAR CLIENTE -->
+<div style="background:var(--gc);padding:60px 24px;">
+<div class="section" style="padding:0;">
+  <div class="split">
+    <div class="text">
+      <div class="section-badge">Paso 3 — Cobrador</div>
+      <h2 class="section-title">Agregar <em>clientes</em></h2>
+      <p class="section-desc">Dentro de cada granja puedes ver los trabajadores registrados y agregar nuevos con el botón "+ Agregar Cliente".</p>
+      <div class="steps-grid">
+        <div class="step-card fade-up">
+          <div class="step-card-num">1</div>
+          <div class="step-card-title">Toca "+ Agregar Cliente"</div>
+          <div class="step-card-desc">Aparece un panel desde abajo para registrar al nuevo trabajador.</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">2</div>
+          <div class="step-card-title">Escribe nombre y línea</div>
+          <div class="step-card-desc">Nombre completo del trabajador y su departamento o línea de trabajo (Ej: Línea A, Empaque).</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">3</div>
+          <div class="step-card-title">Toca "Agregar Cliente"</div>
+          <div class="step-card-desc">El trabajador queda registrado y ya puedes registrar sus comidas.</div>
+          <div class="step-card-tip">💡 El trabajador debe usar exactamente el mismo nombre para entrar a la app.</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="mock-topbar">
+            <div class="mock-logo">Farma<span>Cobro</span></div>
+            <div class="mock-av">CM</div>
+          </div>
+          <div class="mock-content">
+            <div style="font-size:.6rem;color:var(--v);font-weight:600;margin-bottom:8px;">← Mis Granjas</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:.85rem;margin-bottom:8px;">🌾 Highline Mushrooms</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div style="font-size:.5rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gr);">Clientes</div>
+              <div style="background:transparent;border:1.5px solid var(--vc);border-radius:6px;padding:4px 8px;font-size:.48rem;font-weight:700;color:var(--v);">+ Agregar Cliente</div>
+            </div>
+            <div class="mock-item">
+              <div class="tav" style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--vc),var(--vb));display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:700;color:var(--vd);">MH</div>
+              <div style="flex:1"><div class="mock-iname">Miguel Hernández</div><div class="mock-imeta">Línea A · 3 comidas</div></div>
+              <div style="text-align:right"><div class="mock-ideuda">$18</div><div style="font-size:.42rem;color:var(--gr);">debe</div></div>
+            </div>
+            <div class="mock-item">
+              <div class="tav" style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--vc),var(--vb));display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:700;color:var(--vd);">JR</div>
+              <div style="flex:1"><div class="mock-iname">José Ramírez</div><div class="mock-imeta">Empaque · 2 comidas</div></div>
+              <div style="text-align:right"><div style="font-size:.62rem;font-weight:800;color:var(--vc);">✓ Al día</div></div>
+            </div>
+          </div>
+          <div class="mock-bnav">
+            <div class="mock-ni active"><span class="mock-ni-i">🌿</span>Granjas</div>
+            <div class="mock-ni"><span class="mock-ni-i">📊</span>Reportes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PASO 4: REGISTRAR COMIDA -->
+<div class="section">
+  <div class="split">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="mock-topbar">
+            <div class="mock-logo">Farma<span>Cobro</span></div>
+            <div class="mock-av">CM</div>
+          </div>
+          <div class="mock-content">
+            <div style="font-size:.6rem;color:var(--v);font-weight:600;margin-bottom:6px;">← Trabajadores</div>
+            <div class="mock-trab-header">
+              <div class="mock-tav">MH</div>
+              <div style="flex:1"><div class="mock-tname">Miguel Hernández</div><div class="mock-tmeta">Línea A</div></div>
+              <div class="mock-tdeuda">$18.00</div>
+            </div>
+            <div class="mock-tabs">
+              <div class="mock-tab active">📝 Registrar</div>
+              <div class="mock-tab">💰 Cobrar</div>
+              <div class="mock-tab">📋 Historial</div>
+            </div>
+            <div class="mock-card">
+              <div style="font-weight:700;font-size:.6rem;margin-bottom:8px;">➕ Nueva Comida</div>
+              <div class="mock-field"><div class="mock-flabel">¿Qué comió?</div><div class="mock-finput">Comida completa</div></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div class="mock-field"><div class="mock-flabel">Precio $CAD</div><div class="mock-finput">8.00</div></div>
+                <div class="mock-field"><div class="mock-flabel">¿Pagó?</div><div class="mock-finput">❌ No pagó</div></div>
+              </div>
+              <div class="mock-btn">Guardar 🔒</div>
+              <div class="mock-lock">No se puede modificar al guardar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text">
+      <div class="section-badge">Paso 4 — Cobrador</div>
+      <h2 class="section-title">Registrar una <em>comida</em></h2>
+      <p class="section-desc">Toca el nombre del trabajador para entrar a su perfil. Desde ahí puedes registrar lo que comió, el precio y si pagó o quedó a deber.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-card-num">1</div>
+          <div class="step-card-title">Tab "📝 Registrar"</div>
+          <div class="step-card-desc">Escribe qué comió, el precio en dólares canadienses y si pagó en ese momento.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-card-num">2</div>
+          <div class="step-card-title">Toca "Guardar 🔒"</div>
+          <div class="step-card-desc">El registro queda bloqueado permanentemente. Nadie puede borrarlo ni editarlo.</div>
+          <div class="step-card-tip">⚠️ Revisa bien antes de guardar — no hay forma de editar después.</div>
+        </div>
+      </div>
+      <div class="lock-box">
+        <div class="lock-icon-big">🔒</div>
+        <div>
+          <div class="lock-title">Registros permanentes</div>
+          <div class="lock-desc">Una vez que guardas una comida o un pago, el registro queda bloqueado para siempre. Esto protege al dueño y al trabajador — nadie puede cambiar los números.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 5: COBRAR -->
+<div style="background:var(--gc);padding:60px 24px;">
+<div class="section" style="padding:0;">
+  <div class="split">
+    <div class="text">
+      <div class="section-badge">Paso 5 — Cobrador</div>
+      <h2 class="section-title">Registrar un <em>pago</em></h2>
+      <p class="section-desc">Cuando un trabajador te pague lo que debe, entra a su perfil y toca el tab "💰 Cobrar". Ahí registras cuánto pagó y cómo.</p>
+      <div class="steps-grid">
+        <div class="step-card fade-up">
+          <div class="step-card-num">1</div>
+          <div class="step-card-title">Tab "💰 Cobrar"</div>
+          <div class="step-card-desc">Solo aparece si el trabajador tiene saldo pendiente. Si está al corriente, verás un mensaje de confirmación.</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">2</div>
+          <div class="step-card-title">Ingresa el monto</div>
+          <div class="step-card-desc">El monto se llena automáticamente con lo que debe. Puedes cambiarlo si pagó parcial.</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">3</div>
+          <div class="step-card-title">Forma de pago</div>
+          <div class="step-card-desc">Selecciona: Efectivo, E-transfer o Pago parcial.</div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-card-num">4</div>
+          <div class="step-card-title">Confirmar Pago 🔒</div>
+          <div class="step-card-desc">El cobro queda registrado y bloqueado. El saldo del trabajador se actualiza automáticamente.</div>
+          <div class="step-card-tip">💡 El saldo pendiente en la lista de trabajadores se actualiza al instante.</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="mock-topbar">
+            <div class="mock-logo">Farma<span>Cobro</span></div>
+            <div class="mock-av">CM</div>
+          </div>
+          <div class="mock-content">
+            <div style="font-size:.6rem;color:var(--v);font-weight:600;margin-bottom:6px;">← Trabajadores</div>
+            <div class="mock-trab-header">
+              <div class="mock-tav">MH</div>
+              <div style="flex:1"><div class="mock-tname">Miguel Hernández</div><div class="mock-tmeta">Línea A</div></div>
+              <div class="mock-tdeuda">$18.00</div>
+            </div>
+            <div class="mock-tabs">
+              <div class="mock-tab">📝 Registrar</div>
+              <div class="mock-tab active">💰 Cobrar</div>
+              <div class="mock-tab">📋 Historial</div>
+            </div>
+            <div class="mock-cobro">
+              <div class="mock-cobro-title">💰 Registrar Pago</div>
+              <div class="mock-alerta">Deuda actual: <strong>$18.00 CAD</strong></div>
+              <div class="mock-field"><div class="mock-flabel">Monto que pagó</div><div class="mock-finput">18.00</div></div>
+              <div class="mock-field"><div class="mock-flabel">Forma de pago</div><div class="mock-finput">💵 Efectivo</div></div>
+              <div class="mock-btn mock-btn-pago">✅ Confirmar Pago 🔒</div>
+              <div class="mock-lock" style="color:#b05010;">Registro permanente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PASO 6: HISTORIAL -->
+<div class="section">
+  <div class="split">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="mock-topbar">
+            <div class="mock-logo">Farma<span>Cobro</span></div>
+            <div class="mock-av">MH</div>
+          </div>
+          <div class="mock-content">
+            <div style="font-size:.6rem;color:var(--v);font-weight:600;margin-bottom:6px;">← Trabajadores</div>
+            <div class="mock-trab-header">
+              <div class="mock-tav">MH</div>
+              <div style="flex:1"><div class="mock-tname">Miguel Hernández</div><div class="mock-tmeta">Línea A</div></div>
+              <div style="font-size:.85rem;font-weight:800;color:var(--vc);">$0.00</div>
+            </div>
+            <div class="mock-tabs">
+              <div class="mock-tab">📝 Registrar</div>
+              <div class="mock-tab">💰 Cobrar</div>
+              <div class="mock-tab active">📋 Historial</div>
+            </div>
+            <div class="mock-card">
+              <div style="font-size:.5rem;font-weight:700;color:var(--gr);margin-bottom:6px;text-transform:uppercase;">Comidas Registradas</div>
+              <div class="mock-hist-item">
+                <div class="mock-hist-f">21/04</div>
+                <div class="mock-hist-n">Comida completa</div>
+                <div class="mock-hist-m d">⚠ $8.00</div>
+                <span style="font-size:.4rem;color:var(--gr);">🔒</span>
+              </div>
+              <div class="mock-hist-item">
+                <div class="mock-hist-f">22/04</div>
+                <div class="mock-hist-n">Comida completa</div>
+                <div class="mock-hist-m p">✓ $8.00</div>
+                <span style="font-size:.4rem;color:var(--gr);">🔒</span>
+              </div>
+              <div class="mock-hist-item">
+                <div class="mock-hist-f">23/04</div>
+                <div class="mock-hist-n">Comida + refresco</div>
+                <div class="mock-hist-m d">⚠ $10.00</div>
+                <span style="font-size:.4rem;color:var(--gr);">🔒</span>
+              </div>
+            </div>
+            <div class="mock-card">
+              <div style="font-size:.5rem;font-weight:700;color:var(--gr);margin-bottom:6px;text-transform:uppercase;">Pagos Recibidos</div>
+              <div class="mock-hist-item">
+                <div class="mock-hist-f">25/04</div>
+                <div class="mock-hist-n">Pago Efectivo</div>
+                <div class="mock-hist-m p">+ $18.00</div>
+                <span style="font-size:.4rem;color:var(--gr);">🔒</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text">
+      <div class="section-badge">Paso 6</div>
+      <h2 class="section-title">Ver el <em>historial</em></h2>
+      <p class="section-desc">El tab "📋 Historial" muestra todas las comidas y pagos de ese trabajador. Cada registro tiene candado 🔒 y no se puede editar.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-card-num">✓</div>
+          <div class="step-card-title">Verde = pagó</div>
+          <div class="step-card-desc">El ✓ verde indica que esa comida fue pagada en el momento.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-card-num">⚠</div>
+          <div class="step-card-title">Rojo = debe</div>
+          <div class="step-card-desc">El ⚠ rojo indica que esa comida quedó pendiente de pago.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-card-num">+</div>
+          <div class="step-card-title">Pagos recibidos</div>
+          <div class="step-card-desc">Los pagos que registraste aparecen en verde con el signo +.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-card-num">🔒</div>
+          <div class="step-card-title">Todo bloqueado</div>
+          <div class="step-card-desc">El candado confirma que el registro es permanente y no fue modificado.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRABAJADOR VIEW -->
+<div style="background:var(--vd);padding:60px 24px;">
+<div class="section" style="padding:0;">
+  <div style="text-align:center;margin-bottom:36px;">
+    <div style="display:inline-block;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--vb);margin-bottom:10px;">Para el Trabajador</div>
+    <h2 style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--cr);margin-bottom:10px;">Ver mis <em style="font-style:italic;color:var(--vb);">pedidos</em></h2>
+    <p style="font-size:.85rem;color:rgba(248,244,232,.5);max-width:400px;margin:0 auto;">Como trabajador entras con tu nombre y ves solo tu información — cuánto debes y tu historial de comidas.</p>
+  </div>
+  <div style="display:flex;justify-content:center;">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="screen">
+          <div class="mock-topbar">
+            <div class="mock-logo">Farma<span>Cobro</span></div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div style="font-size:.42rem;color:var(--vb);background:rgba(116,198,157,.15);padding:2px 6px;border-radius:8px;">Trabajador</div>
+              <div class="mock-av">MH</div>
+            </div>
+          </div>
+          <div class="mock-content">
+            <div class="mock-title">Mis Pedidos</div>
+            <div style="font-size:.52rem;color:var(--gr);margin-bottom:10px;">📍 Highline Mushrooms</div>
+            <div class="mock-stats">
+              <div class="mock-stat"><div class="mock-snum" style="color:var(--ro);">$0.00</div><div class="mock-slabel">Saldo Pendiente</div></div>
+              <div class="mock-stat"><div class="mock-snum">3</div><div class="mock-slabel">Comidas</div></div>
+            </div>
+            <div style="font-size:.5rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gr);margin-bottom:8px;">Historial</div>
+            <div class="mock-card">
+              <div class="mock-hist-item">
+                <div class="mock-hist-f">21/04</div>
+                <div class="mock-hist-n">Comida completa</div>
+                <div class="mock-hist-m d">⚠️ $8.00</div>
+              </div>
+              <div class="mock-hist-item">
+                <div class="mock-hist-f">22/04</div>
+                <div class="mock-hist-n">Comida completa</div>
+                <div class="mock-hist-m p">✓ $8.00</div>
+              </div>
+              <div class="mock-hist-item">
+                <div class="mock-hist-f">23/04</div>
+                <div class="mock-hist-n">Comida + refresco</div>
+                <div class="mock-hist-m d">⚠️ $10.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-bnav">
+            <div class="mock-ni active"><span class="mock-ni-i">🍽️</span>Mis Pedidos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- COMIDAS Y ELIMINAR -->
+<div style="background:var(--gc);padding:60px 24px;">
+<div class="section" style="padding:0;">
+  <div class="section-badge">Nuevas Funciones</div>
+  <h2 class="section-title">Registrar <em>comidas</em> y eliminar</h2>
+  <p class="section-desc">La app tiene funciones avanzadas para registrar múltiples comidas por persona y mantener la base de datos limpia.</p>
+  
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-card-num">🍽️</div>
+      <div class="step-card-title">Tipo de comida</div>
+      <div class="step-card-desc">Selecciona: Desayuno, Comida, Cena, Desayuno y Comida, Las 3 comidas, o Otro para escribir manualmente.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">2x</div>
+      <div class="step-card-title">Cantidad de comidas</div>
+      <div class="step-card-desc">Selecciona 1, 2 o 3 comidas. El total se calcula automáticamente. Ejemplo: 2 comidas x $7 = $14.00</div>
+      <div class="step-card-tip">💡 El total aparece en verde antes de guardar para que confirmes el monto.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">$</div>
+      <div class="step-card-title">Precio editable</div>
+      <div class="step-card-desc">Cada comida tiene precio diferente — $5, $6, $7, $8. Tú lo escribes cada vez según lo que vendiste.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">🗑️</div>
+      <div class="step-card-title">Eliminar clientes</div>
+      <div class="step-card-desc">Cada cliente tiene un botón 🗑️. Al tocarlo pregunta si quieres descargar su historial antes de eliminar.</div>
+      <div class="step-card-tip">💡 Siempre descarga el historial antes de eliminar — así tienes el registro guardado.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">🗑️</div>
+      <div class="step-card-title">Eliminar granjas</div>
+      <div class="step-card-desc">Si ya no vas a una granja, puedes eliminarla con todos sus clientes y registros para no saturar la app.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">🔐</div>
+      <div class="step-card-title">Eliminar cobradores</div>
+      <div class="step-card-desc">Si un cobrador ya no trabaja contigo, elimínalo. Su nombre y PIN dejan de funcionar automáticamente.</div>
+    </div>
+  </div>
+
+  <div class="lock-box">
+    <div class="lock-icon-big">⚠️</div>
+    <div>
+      <div class="lock-title">3 opciones al eliminar</div>
+      <div class="lock-desc">
+        1. <strong>Descargar y eliminar</strong> — Descarga el historial en Excel y luego borra<br>
+        2. <strong>Eliminar todo</strong> — Borra sin descargar<br>
+        3. <strong>Cancelar</strong> — No hace nada
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FAQ -->
+<!-- PREGUNTAS FRECUENTES -->
+<div class="section">
+  <div class="section-badge">FAQ</div>
+  <h2 class="section-title">Preguntas <em>frecuentes</em></h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿Se pierden los datos si cierro la app?</div>
+      <div class="step-card-desc">No. Todo se guarda automáticamente en tu teléfono. La próxima vez que abras la app, todo estará igual.</div>
+    </div>
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿Puedo editar una comida ya guardada?</div>
+      <div class="step-card-desc">No. Los registros son permanentes y tienen candado 🔒. Esto protege la integridad de los datos.</div>
+    </div>
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿El trabajador puede ver lo que deben otros?</div>
+      <div class="step-card-desc">No. Cada trabajador solo ve su propia información. La privacidad está protegida.</div>
+    </div>
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿Necesito internet para usarla?</div>
+      <div class="step-card-desc">Solo para cargarla la primera vez. Después funciona sin conexión a internet en la granja.</div>
+    </div>
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿Puedo tener varias granjas?</div>
+      <div class="step-card-desc">Sí, puedes agregar todas las granjas que necesites con el botón + Nueva Granja.</div>
+    </div>
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿El dueño puede ver todo desde otra ciudad?</div>
+      <div class="step-card-desc">Sí, el dueño entra con su PIN desde cualquier teléfono y ve el resumen de todas las granjas.</div>
+    </div>
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿Qué pasa si un cobrador olvida su PIN?</div>
+      <div class="step-card-desc">El dueño puede ver el PIN de cada cobrador en la sección "👥 Equipo" y volver a compartírselo.</div>
+    </div>
+    <div class="step-card">
+      <div style="font-size:1.5rem;">❓</div>
+      <div class="step-card-title">¿Un cobrador puede ver las granjas de otro?</div>
+      <div class="step-card-desc">No. Cada cobrador solo ve las granjas que el dueño le asignó. La información está separada por usuario.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COBRADORES (DUEÑO) -->
+<div style="background:var(--gc);padding:60px 24px;">
+<div class="section" style="padding:0;">
+  <div class="section-badge">Solo el Dueño</div>
+  <h2 class="section-title">Gestionar <em>cobradores</em></h2>
+  <p class="section-desc">El dueño puede agregar a todos sus cobradores, asignarles un PIN y ver cuánto cobró cada uno. Sin PIN registrado, nadie puede entrar como cobrador.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-card-num">👥</div>
+      <div class="step-card-title">Tab "Equipo" en el menú</div>
+      <div class="step-card-desc">El dueño tiene un ícono 👥 en la barra de navegación. Ahí ve la lista de todos sus cobradores registrados.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">+</div>
+      <div class="step-card-title">Agregar cobrador</div>
+      <div class="step-card-desc">Toca "+ Nuevo Cobrador", escribe el nombre y un PIN de 4 dígitos que tú eliges para esa persona.</div>
+      <div class="step-card-tip">💡 Usa un PIN diferente para cada cobrador. Por ejemplo: Carlos = 2847, Daniela = 5391</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">🔑</div>
+      <div class="step-card-title">Compartir el PIN</div>
+      <div class="step-card-desc">Al guardar, la app muestra el PIN claramente para que se lo mandes al cobrador por WhatsApp. Sin ese PIN no puede entrar.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-num">📊</div>
+      <div class="step-card-title">Ver rendimiento</div>
+      <div class="step-card-desc">La app muestra cuánto cobró cada uno, cuántas comidas registró y en qué granjas trabaja — todo en una sola pantalla.</div>
+      <div class="step-card-tip">💡 Así sabes quién trabaja más y quién necesita mejorar.</div>
+    </div>
+  </div>
+  <div class="lock-box" style="background:#e8f4fd;border-color:#74b9ff;">
+    <div class="lock-icon-big">🔐</div>
+    <div>
+      <div class="lock-title" style="color:#0066cc;">Seguridad por cobrador</div>
+      <div class="lock-desc" style="color:#0055aa;">Cada cobrador solo puede ver sus granjas asignadas. No puede ver las granjas de otro cobrador ni modificar registros de otros. El dueño ve todo.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- footer -->
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Farma<span>Cobro</span></div>
+  <div class="footer-sub">Control de comidas para granjas en Ontario, Canadá</div>
+  <a class="footer-link" href="https://danyyalexlove-collab.github.io/Co/farmacobro-23.html">
+    📱 Abrir la App
+  </a>
+  <div style="margin-top:24px;font-size:.72rem;color:rgba(248,244,232,.25);">Desarrollado por Lolo Digital · lolodigital.ca</div>
+</footer>
+
+</body>
+</html>
